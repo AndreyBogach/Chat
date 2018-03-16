@@ -2,3 +2,6 @@ Chat.DAL/obj/
 Chat.Web/bin/
 Chat.Web/obj/
 packages/
+Chat.Common/bin/
+Chat.Common/obj/
+Chat.DAL/bin/
