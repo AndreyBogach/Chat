@@ -1,0 +1,25 @@
+﻿@model Chat.Web.Models.UserViewModel
+
+@{
+    ViewBag.Title = "Web Template || Login";
+    Layout = "~/Views/Shared/_Login.cshtml";
+}
+
+
+<h3>Welcome!</h3>
+<h4>Just enter your email address or username and we’ll get you right into Chat panel.</h4>
+
+@using (Html.BeginForm("Login", "Account", new { area = "", ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form", role = "form"}))
+{
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    <div id="sum_error"></div>
+    <div class="form-group">
+        <label>Email address or username</label>
+        @Html.TextBoxFor(m => m.Email, new { @class = "form-control", type = "email", @placeholder = "example@mail.com", @autofocus = "autofocus", @required = "required" })
+        @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger" })           
+    </div>
+
+    <div class="form-group">
+        <input type="submit" value="Log in" />
+    </div>
+}

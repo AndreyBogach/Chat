@@ -24,8 +24,9 @@ namespace Chat.Web
                       "~/Scripts/respond.js"));
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
-                      "~/Content/bootstrap.css",
-                      "~/Content/site.css"));
+                      "~/Content/bootstrap.min.css",
+                      "~/Content/flaticon.css",
+                      "~/Content/styles.css"));
         }
     }
 }

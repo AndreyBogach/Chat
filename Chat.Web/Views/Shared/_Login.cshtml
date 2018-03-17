@@ -1,0 +1,39 @@
+﻿<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+
+    <!-- Facebook Pixel Code -->
+    <script>
+        !function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+        n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;
+        n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;
+        t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,
+        document,'script','https://connect.facebook.net/en_US/fbevents.js');
+        fbq('init', '1682569605342843');
+        fbq('track', 'PageView');
+    </script>
+    <noscript><img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=1682569605342843&ev=PageView&noscript=1" /></noscript>
+</head>
+
+<body class="enter-account">
+    <div class="container" style="margin-top: 3%">
+        <img class="logo-image" src="http://web.uni-plovdiv.bg/vebaev/NHK/smile.png" />
+        <div class="enter-view-wrap">
+            <div class="white-wrapper">
+
+                @RenderBody()
+            </div>
+            <p class="copyrights">AppName<span>&copy;</span>  2017</p>
+        </div>
+    </div>
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+</body>
+
+</html>

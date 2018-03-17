@@ -1,0 +1,74 @@
+﻿@font-face {
+  font-family: "Flaticon";
+  src: url("../fonts/Flaticon.eot");
+  src: url("../fonts/Flaticon.eot?#iefix") format("embedded-opentype"),
+       url("../fonts/Flaticon.woff") format("woff"),
+       url("../fonts/Flaticon.ttf") format("truetype"),
+       url("../fonts/Flaticon.svg#Flaticon") format("svg");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@media screen and (-webkit-min-device-pixel-ratio:0) {
+  @font-face {
+    font-family: "Flaticon";
+    src: url("../fonts/Flaticon.svg#Flaticon") format("svg");
+  }
+}
+
+[class^="flaticon-"]:before, [class*=" flaticon-"]:before,
+[class^="flaticon-"]:after, [class*=" flaticon-"]:after {   
+    font-family: Flaticon;
+    /*font-size: 20px;*/
+    font-style: normal;
+}
+
+.flaticon-signs:before { content: "\f100"; }
+.flaticon-black-circle:before { content: "\f101"; }
+.flaticon-gps:before { content: "\f102"; }
+.flaticon-people-1:before { content: "\f103"; }
+.flaticon-down-arrow:before { content: "\f104" !important; }
+.flaticon-up-arrow-angle:before { content: "\f105"; }
+.flaticon-clock-circular-outline:before { content: "\f106"; }
+.flaticon-back-arrow:before { content: "\f107"; }
+.flaticon-circle-with-check-symbol:before { content: "\f108"; }
+.flaticon-history-clock-button:before { content: "\f109"; }
+.flaticon-delete:before { content: "\f10a"; }
+.flaticon-dustbin:before { content: "\f10b"; }
+.flaticon-pdf-file-format-symbol:before { content: "\f10c"; }
+.flaticon-xlsx-file-format-extension:before { content: "\f10d"; }
+.flaticon-home-page:before { content: "\f10e"; }
+.flaticon-question-mark:before { content: "\f10f"; }
+.flaticon-location-pointer:before { content: "\f110"; }
+.flaticon-mathematical-addition-sign:before { content: "\f111"; }
+.flaticon-light-bulb-on:before { content: "\f112"; }
+.flaticon-web:before { content: "\f113"; }
+.flaticon-zoom:before { content: "\f114"; }
+.flaticon-qr-code:before { content: "\f115"; }
+.flaticon-correct-symbol:before { content: "\f116"; }
+.flaticon-dashboard:before { content: "\f117"; }
+.flaticon-login:before { content: "\f118"; }
+.flaticon-navigation:before { content: "\f119"; }
+.flaticon-database:before { content: "\f11a"; }
+.flaticon-attachment:before { content: "\f11b"; }
+.flaticon-alarm:before { content: "\f11c"; }
+.flaticon-interface:before { content: "\f11d"; }
+.flaticon-transport:before { content: "\f11e"; }
+.flaticon-group:before { content: "\f11f"; }
+.flaticon-two:before { content: "\f120"; }
+.flaticon-menu:before { content: "\f121"; }
+.flaticon-disable:before { content: "\f122"; }
+.flaticon-remove-1:before { content: "\f123"; }
+.flaticon-shopping:before { content: "\f124"; }
+.flaticon-logout:before { content: "\f125"; }
+.flaticon-airport-conveyor:before { content: "\f126"; }
+.flaticon-disabled:before { content: "\f127"; }
+.flaticon-letter-x:before { content: "\f128"; }
+.flaticon-plus-symbol:before { content: "\f129"; }
+.flaticon-car:before { content: "\f12a"; }
+.flaticon-checked-1:before { content: "\f12b"; }
+.flaticon-avatar:before { content: "\f12c"; }
+.flaticon-ticket:before { content: "\f12d"; }
+.flaticon-checked:before { content: "\f12e"; }
+.flaticon-remove:before { content: "\f12f"; }
+.flaticon-people:before { content: "\f130"; }
