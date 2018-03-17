@@ -1,0 +1,171 @@
+﻿@model PagingList<Chat.DAL.Models.Chat>
+@using Chat.DAL.Models.Pagging;
+
+@{
+    ViewBag.Title = "Chats";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<script src="https://js.pusher.com/4.1/pusher.min.js"></script>
+<style>
+    .chat {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        height: 350px;
+        overflow-y: auto;
+    }
+
+    .chat-img img {
+        max-width: 55px;
+    }
+
+    .chat li {
+        margin-bottom: 10px;
+        padding-bottom: 5px;
+        border-bottom: 1px dotted #B3A9A9;
+    }
+
+        .chat li.left .chat-body {
+            margin-left: 60px;
+        }
+
+        .chat li.right .chat-body {
+            margin-right: 10px;
+        }
+
+
+        .chat li .chat-body p {
+            margin: 0;
+            color: #777777;
+        }
+
+    .panel .slidedown .glyphicon, .chat .glyphicon {
+        margin-right: 5px;
+    }
+
+    .input-group-btn .btn.invalid {
+        pointer-events: none;
+        background: #bfbfbf;
+        border: 1px solid #b5b5b5;
+    }
+
+    .input-group-btn {
+        cursor: not-allowed;
+    }
+</style>
+
+<h2 class="main-title">Chats</h2>
+<input type="hidden" id="reciever" value="@ViewBag.Reciever">
+<input type="hidden" id="sender" value="@ViewBag.Sender">
+<input type="hidden" id="senderAvatar" value="@ViewBag.SenderAvatar">
+
+<div class="row">
+    <div class="col-sm-12">
+        <div class="panel panel-primary">
+            <div class="panel-heading">
+                CHAT SUBJECT
+            </div>
+            <div class="panel-body">
+                <ul class="chat" id="chat">
+                    @foreach (var item in Model.Items)
+                    {
+                        <li class="left clearfix">
+                            <span class="chat-img pull-left">
+                                @if (!string.IsNullOrEmpty(item.Sender.Avatar))
+                                {
+                                    <img src=@item.Sender.Avatar alt="User Avatar" class="img-circle">
+                                }
+                                else
+                                { <img src="https://i.pinimg.com/originals/7c/c7/a6/7cc7a630624d20f7797cb4c8e93c09c1.png " alt="User Avatar" class="img-circle">}
+                            </span>
+                            <div class="chat-body clearfix">
+                                <div class="header">
+                                    <strong class="primary-font">@item.Sender.Name</strong> <small class="pull-right text-muted"></small>
+                                </div>
+
+                                <div class="right-header">
+                                    <span class="glyphicon glyphicon-time"></span>@String.Format("{0:MMM. d, yyyy}", item.Date)
+                                </div>
+
+                                <p><small class="text-muted">@item.Message</small></p>
+                            </div>
+                        </li>
+                    }
+                </ul>
+            </div>
+            <div class="panel-footer">
+                <div class="input-group">
+                    <input id="btn-input" class="form-control input-sm" placeholder="Type your message here..." type="text">
+                    <span class="input-group-btn">
+                        <button class="btn btn-warning btn-sm invalid" id="btn-chat">
+                            Send
+                        </button>
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="~/Scripts/jquery-3.3.1.js"></script>
+<script>
+    $(document).ready(function () {
+
+        $('#chat').animate({
+            scrollTop: $('#chat')[0].scrollHeight
+        }, 500);
+
+        $("#btn-input").on('input', function () {
+            var input = $(this);
+            var is_name = input.val();
+            if (is_name) {
+                $('#btn-chat').removeClass("invalid").addClass("valid");
+            }
+            else {
+                $('#btn-chat').removeClass("valid").addClass("invalid");
+            }
+        })
+
+        $("#btn-chat").click(function () {
+            var message = $('#btn-input').val();
+            var id = $('#reciever').val();
+            $.post({
+                url: '@Url.Action("Pushermessage", "Chat")',
+                dataType: 'text/HTML',
+                contentType: "application/json",
+                data: JSON.stringify({
+                    "message": message,
+                    "id": id
+                }),
+                success: function (data) {
+                    $("#btn-input").val('');
+                }
+            });
+            $("#btn-input").val('');
+        });
+
+        var sender = $('#sender').val();
+        var avatar = $('#senderAvatar').val();
+        var pusher = new Pusher('e9864ac961f7c5480aa0', { cluster: 'eu' });
+        var my_channel = pusher.subscribe('asp_channel');
+        my_channel.bind("asp_event", function (data) {
+            var new_message = '<li class="left clearfix"><span class="chat-img pull-left">';
+            new_message += '<img src="'+ avatar + '" alt="User Avatar" class="img-circle">';
+            new_message += '</span>';
+            new_message += '<div class="chat-body clearfix">';
+            new_message += '<div class="header">';
+            new_message += '<strong class="primary-font">' + sender + '</strong> <small class="pull-left text-muted">';
+            new_message += '</div>';
+            new_message += '<p>';
+            new_message += data.message;
+            new_message += '</p>';
+            new_message += '</div>';
+            new_message += '</li>';
+            $("#chat").append(new_message);
+            $('#chat').animate({
+                scrollTop: $('#chat')[0].scrollHeight
+            }, 500);
+        });
+    })
+</script>

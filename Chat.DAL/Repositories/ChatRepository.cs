@@ -52,10 +52,10 @@ namespace Chat.DAL.Repositories
 
             var values = context.mdl_chat.Where(w => w.sender_id == sender_id && w.receiver_id == receiver_id ||
                                                (w.sender_id == receiver_id && w.receiver_id == sender_id) && w.record_state != 1)
-                                         .OrderByDescending(o => o.creation_date).ToList();
+                                         .OrderByDescending(o => o.creation_date).AsQueryable();
 
             var result = values.Skip((page - 1) * pageSize).Take(pageSize).ToList();
-
+            result = result.OrderBy(w => w.creation_date).ToList();
             res.Items = Map(result);
             res.PagingInfo = new PagingInfo
             {

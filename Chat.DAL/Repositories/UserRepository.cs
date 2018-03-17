@@ -63,10 +63,10 @@ namespace Chat.DAL.Repositories
             return true;
         }
 
-        public IEnumerable<User> GetAll()
+        public IEnumerable<User> GetAll(string email)
         {
             var res = context.mdl_user
-                    .Where(w => w.record_state != 1)
+                    .Where(w => w.email != email && w.record_state != 1)
                     .OrderByDescending(o => o.creation_date).ToList();
             return Map(res);
         }
@@ -118,6 +118,7 @@ namespace Chat.DAL.Repositories
             var dbUser = context.mdl_user.Create();
 
             dbUser.name = account.Name;
+            dbUser.avatar = "https://i.pinimg.com/originals/7c/c7/a6/7cc7a630624d20f7797cb4c8e93c09c1.png";
             dbUser.email = account.Email;
             dbUser.password = account.Password;
             dbUser.creation_date = DateTime.UtcNow;
@@ -136,7 +137,24 @@ namespace Chat.DAL.Repositories
 
         public OperationResult Update(User account)
         {
-            throw new NotImplementedException();
+            var result = OperationResult.CreateWithSuccess();
+
+            if (account == null)
+                return OperationResult.CreateWithError("Invalid user data!");
+
+            var dbUser = context.mdl_user.Find(account.Id);
+
+            if (dbUser != null)
+            {
+                dbUser.name = account.Name;
+                if (!string.IsNullOrEmpty(account.Avatar))
+                    dbUser.avatar = account.Avatar;
+                dbUser.record_state = 2;
+
+                context.SaveChanges();
+            }
+
+            return result;
         }
 
         private static List<User> Map(List<mdl_user> items)
